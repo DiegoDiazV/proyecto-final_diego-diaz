@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-10">
+            <div class="d-flex justify-content-center mt-5 p-4 default-panel">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="text-center mb-4 text-primary">About</h1>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <img src="{% static 'img/about.png' %}" alt="about image" class="about-img mb-2">
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col text-center mb-4">
+                            <h4 class="mb-4">Creador de la web: Diego Díaz</h4>
+                            <p class="text-justify"><b>¡Hola!</b> Un gusto 🖐️. Tengo 25 años y soy Ingeniero en Informática. Llevo una experiencia de alrededor de dos años y medio trabajando como Desarrollador de Software, desempeñandome en el área del desarrollo web. He trabajado con distintos lenguajes de programación tales como: Javascript, Java, C#, entre otros.</p>
+                            <p class="text-justify">Me considero una persona muy autodidacta por estar siempre en búsqueda de nuevos conocimientos informáticos, es por esto mismo, que he participado en el curso de Python en <b>Coderhouse</b>. Espero cumplir con los requerimientos solicitados para este proyecto final 😀.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+</div>
+{% endblock content %} 
