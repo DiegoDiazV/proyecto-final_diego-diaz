@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
         <a class="navbar-brand" href="{% url 'Home' %}">Proyecto Final</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,14 +33,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Blogs</a>
+                    <a class="nav-link" href="{% url 'Pages' %}">Blogs</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'About' %}">About</a>
                 </li>
             </ul>
             <div class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Iniciar sesión</button>
+                {% if user.is_authenticated %}
+                {% if avatar %}
+                <img src="{{avatar.imagen.url}}" alt="user image" class="avatar-navbar">
+                {% endif %}
+                <a class="btn btn-primary my-2 my-sm-0" style="margin-right: 10px;" href="{% url 'Profile' %}">Mi perfil</a>
+                <a class="btn btn-danger my-2 my-sm-0" href="{% url 'Logout' %}">Cerrar sesión</a>
+                {% else %}
+                <a class="btn btn-success my-2 my-sm-0" href="{% url 'Login' %}">Iniciar sesión</a>
+                {% endif %}
             </div>
         </div>
     </nav>

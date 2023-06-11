@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="d-flex justify-content-center mt-5 p-4 default-panel">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h1 class="text-center mb-4">Crea tu cuenta</h1>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-12 mb-4">
+                                <form action="" method="POST">{% csrf_token %}
+                                    <div class="row justify-content-center mb-2">
+                                        <div class="col-6">
+                                            {{ form.username.label_tag }}
+                                            {{ form.username }}
+                                        </div>
+                                        <div class="col-6">
+                                            {{ form.email.label_tag }}
+                                            {{ form.email }}
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center mb-2">
+                                        <div class="col-6">
+                                            {{ form.first_name.label_tag }}
+                                            {{ form.first_name }}
+                                        </div>
+                                        <div class="col-6">
+                                            {{ form.last_name.label_tag }}
+                                            {{ form.last_name }}
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center mb-4">
+                                        <div class="col-6">
+                                            {{ form.password1.label_tag }}
+                                            {{ form.password1 }}
+                                        </div>
+                                        <div class="col-6">
+                                            {{ form.password2.label_tag }}
+                                            {{ form.password2 }}
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center mb-4">
+                                        <button class="btn btn-primary btn-principal w-30">Registrarme</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %} 

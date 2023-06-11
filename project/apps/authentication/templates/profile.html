@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="d-flex justify-content-center mt-5 p-4 default-panel">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="text-center mb-4">Mi perfil</h1>
+                        </div>
+                    </div>
+                    <div>
+                        <nav class="navbar navbar-expand-lg flex-column">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                              <ul class="navbar-nav">
+                                <li class="nav-item">
+                                  <a class="nav-link disabled" href="#">Actualizar datos</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="{% url 'Avatar' %}">Editar avatar</a>
+                                </li>
+                              </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    {% if message %}
+                    <div class="row justify-content-center">
+                        <div class="col-6">
+                            <div class="alert alert-success" role="alert">
+                                {{ message }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="row justify-content-center">
+                        <div class="col-12 mb-4">
+                            <form action="" method="POST">{% csrf_token %}
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        {{ form.email.label_tag }}
+                                        {{ form.email }}
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-6">
+                                        {{ form.first_name.label_tag }}
+                                        {{ form.first_name }}
+                                    </div>
+                                    <div class="col-6">
+                                        {{ form.last_name.label_tag }}
+                                        {{ form.last_name }}
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center mb-2">
+                                    <button class="btn btn-primary btn-principal w-30">Guardar cambios</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %} 

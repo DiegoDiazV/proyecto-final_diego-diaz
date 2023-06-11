@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="d-flex justify-content-center mt-5 p-4 default-panel">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h1 class="text-center mb-4">Iniciar sesión</h1>
+                            </div>
+                        </div>
+                        {% if message %}
+                        <div class="row justify-content-center">
+                            <div class="col-8">
+                                <div class="alert alert-danger" role="alert">
+                                    {{ message }}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="row justify-content-center">
+                            <div class="col-5 mb-4">
+                                <form action="" method="POST">{% csrf_token %}
+                                    <div class="row justify-content-center mb-4">
+                                        {{ form.username }}
+                                    </div>
+                                    <div class="row justify-content-center mb-4">
+                                        {{ form.password }}
+                                    </div>
+                                    <div class="row justify-content-center mb-4">
+                                        <button class="btn btn-primary btn-principal w-100">Entrar</button>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        ¿No tienes cuenta?
+                                        <a class="btn btn-success w-100 mt-2" href="{% url 'Signup' %}"><b>Registrate</b></a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %} 

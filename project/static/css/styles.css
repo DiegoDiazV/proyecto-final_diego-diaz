@@ -1,5 +1,8 @@
 body {
     background-color: #e4e4e4;
+}
+
+.text-white{
     color: #F9F9F9;
 }
 
@@ -12,12 +15,35 @@ body {
     width: 30%;
 }
 
+.w-100 {
+    width: 100%;
+}
+
+.btn-principal {
+    height: 40px;
+    font-weight: bold;
+}
+
 .default-panel {
     background-color: white;
     color: rgb(0, 0, 70);
+    border-radius: 10px;
 }
 
 .about-img {
     width: 40%;
     border-radius: 50%;
+}
+
+.avatar-img {
+    width: 30%;
+    border-radius: 45%;
+    margin: auto;
+    display: block;
+}
+
+.avatar-navbar {
+    width: 40px;
+    border-radius: 20%;
+    margin-right: 20px;
 }

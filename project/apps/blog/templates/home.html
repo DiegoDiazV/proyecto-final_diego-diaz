@@ -1,23 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="main">
-    <div class="container">
-        <div class="row justify-content-md-center align-items-center" style="height: 800px;">
-            <div class="col col-lg-2">
-
-            </div>
-            <div class="col-md-auto text-center">
-                <h1 class="main-title">Proyecto Final</h1>
-                <h2>¡Comienza ya a crear tus blogs!</h2>
-                <div class="row justify-content-around mt-4">
-                    <button class="btn btn-primary w-30" type="submit">Comenzar</button>
-                    <button class="btn btn-success w-30" type="submit">Ver blogs</button>
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="d-flex justify-content-center mt-5 p-4 default-panel">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 class="text-center mb-4">Bienvenido, {{ user.first_name }}</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h5>Mis blogs</h5>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col col-lg-2">
-
             </div>
         </div>
     </div>
 </div>
+{% else %}
+<div class="main">
+    <div class="container text-white">
+        <div class="row justify-content-md-center align-items-center" style="height: 800px;">
+            <div class="col-md-auto text-center">
+                <h1 class="main-title">Proyecto Final</h1>
+                <h2>¡Comienza ya a crear tus blogs!</h2>
+                <div class="row justify-content-around mt-4">
+                    <a class="btn btn-primary w-30" href="{% url 'Login' %}">Comenzar</a>
+                    <a class="btn btn-success w-30" href="{% url 'Pages' %}">Ver blogs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock content %} 
