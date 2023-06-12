@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <a class="btn btn-primary m-3" href="{% url 'Pages' %}">Volver</a>
+        </div>
+        <div class="row justify-content-center mt-2 ">
+            <div class="col-12">
+                <div class="d-flex justify-content-center p-4 default-panel">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h1 class="text-center mb-4">{{ blog.titulo }}</h1>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <h6 class="text-center text-secondary">{{ blog.fecha_creacion|date:"d/m/Y" }}</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-10">
+                                <p class="text-justify">{{ blog.cuerpo }}</p>
+                            </div>
+                        </div>
+                        {% if blog.imagen %}
+                        <div class="row justify-content-center mb-3 mt-2">
+                            <div class="col-10">
+                                <img src="{{blog.imagen.url}}" alt="blog image" class="img-blog">
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="row">
+                            <h6 class="text-center text-secondary">Vistas: {{ blog.visitas }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %} 

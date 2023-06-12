@@ -10,7 +10,7 @@
                       <h5 class="card-title">{{ b.titulo }}</h5>
                       <h6 class="card-subtitle mb-2 text-muted">Autor: {{ b.user.username }}</h6>
                       <p class="card-text">{{ b.cuerpo|slice:":50" }}...</p>
-                      <a href="#" class="card-link">Ver más</a>
+                      <a href="{% url 'Detail' id=b.id %}" class="card-link">Ver más</a>
                     </div>
                 </div>
             </div>

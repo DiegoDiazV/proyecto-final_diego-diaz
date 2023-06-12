@@ -47,3 +47,12 @@ body {
     border-radius: 20%;
     margin-right: 20px;
 }
+
+.img-blog {
+    width: 100%;
+}
+
+.text-secondary{
+    font-style: italic;
+    color: rgb(59, 59, 59);
+}
