@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from authentication.models import Avatar
 from django.db.models import Q
 from .models import Blog
-from .forms import BlogRegisterForm
+from .forms import BlogForm
 from datetime import date
 
 # Create your views here.
@@ -14,8 +14,8 @@ def home(request):
             avatar = Avatar.objects.get(user=request.user.id)
         except Avatar.DoesNotExist:
             avatar = None
-        publicBlogs = Blog.objects.filter(publico=True).order_by('-fecha_creacion')
-        privateBlogs = Blog.objects.filter(publico=False).order_by('-fecha_creacion')
+        publicBlogs = Blog.objects.filter(Q(publico=True) & Q(user=request.user)).order_by('-fecha_creacion')
+        privateBlogs = Blog.objects.filter(Q(publico=False) & Q(user=request.user)).order_by('-fecha_creacion')
         context = {"avatar": avatar, "publicBlogs": publicBlogs, "privateBlogs": privateBlogs}
         return render(request, "home.html", context)
     else:
@@ -41,16 +41,17 @@ def detail(request, id):
 @login_required
 def newBlog(request):
     if request.method == 'POST':
-        form = BlogRegisterForm(request.POST)
+        form = BlogForm(request.POST, request.FILES)
+        print(form)
         if form.is_valid:
-                data = form.cleaned_data
-                blog = Blog(titulo = data["titulo"],cuerpo = data["cuerpo"], fecha_creacion = date.today(), imagen = data["imagen"], publico = data["publico"], visitas = 0, user = request.user)
-                blog.save()
-                form = BlogRegisterForm()
-                message = "¡Blog creado con éxito!"
-                return render(request, "success.html", {"message": message})
+            data = form.cleaned_data
+            blog = Blog(titulo = data["titulo"],cuerpo = data["cuerpo"], fecha_creacion = date.today(), imagen = data["imagen"], publico = data["publico"], visitas = 0, user = request.user)
+            blog.save()
+            form = BlogForm()
+            message = "¡Blog creado con éxito!"
+            return render(request, "success.html", {"message": message})
     else:
-        form = BlogRegisterForm()
+        form = BlogForm()
     
     return render(request, "new-blog.html", {"form":form})
 
@@ -60,6 +61,36 @@ def editBlog(request, id):
     user = request.user
     try:
         blog = Blog.objects.get(Q(id=id) & Q(user=user))
+        if request.method == 'POST':
+            form = BlogForm(request.POST, request.FILES)
+            print(form)
+            if form.is_valid:
+                data = form.cleaned_data
+                blog.titulo = data["titulo"]
+                blog.cuerpo = data["cuerpo"]
+                if data["imagen"] != None:
+                    blog.imagen = data["imagen"]
+                blog.publico = data["publico"]
+                blog.save()
+                message = "¡Blog editado con éxito!"
+                return render(request, "success.html", {"message": message})
+        else:
+            form = BlogForm(initial={"titulo": blog.titulo, 'cuerpo': blog.cuerpo, 'imagen': blog.imagen, 'publico': blog.publico})
+        
+        return render(request, "edit-blog.html", {"form": form, "blog_id":id})
     except Blog.DoesNotExist:
         return render(request, "404.html")
     
+@login_required  
+def deleteBlog(request, id):
+    user = request.user
+    try:
+        blog = Blog.objects.get(Q(id=id) & Q(user=user))
+        if request.method == 'POST':
+            blog.delete()
+            message = "¡Blog eliminado con éxito!"
+            return render(request, "success.html", {"message": message})
+        else:
+            return render(request, "delete-blog.html", {"blog": blog})
+    except Blog.DoesNotExist:
+        return render(request, "404.html")

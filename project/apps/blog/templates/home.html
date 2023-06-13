@@ -36,7 +36,7 @@
                                         <h5 class="card-title">{{ b.titulo }}</h5>
                                         <h6 class="card-subtitle mb-2 text-muted">{{ b.fecha_creacion|date:"d/m/Y" }}</h6>
                                         <p class="card-text">{{ b.cuerpo|slice:":50" }}...</p>
-                                        <a href="{% url 'Detail' id=b.id %}" class="card-link">Editar</a>
+                                        <a href="{% url 'EditBlog' id=b.id %}" class="card-link">Editar</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +56,18 @@
                         </div>
                         <div class="row">
                             {% if privateBlogs %}
-                            
+                            {% for b in privateBlogs %}
+                            <div class="col-3">
+                                <div class="card mt-2" style="width: 100%;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ b.titulo }}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ b.fecha_creacion|date:"d/m/Y" }}</h6>
+                                        <p class="card-text">{{ b.cuerpo|slice:":50" }}...</p>
+                                        <a href="{% url 'EditBlog' id=b.id %}" class="card-link">Editar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
                             {% else %}
                             <div class="col-12">
                                 <p>Aún no tienes blogs privados.</p>
