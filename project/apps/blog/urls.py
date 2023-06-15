@@ -8,5 +8,7 @@ urlpatterns = [
     path('pages/<id>', views.detail, name="Detail"),
     path('user/pages/new', views.newBlog, name="NewBlog"),
     path('user/pages/edit/<id>', views.editBlog, name="EditBlog"),
-    path('user/pages/delete/<id>', views.deleteBlog, name="DeleteBlog")
+    path('user/pages/delete/<id>/<fromDetail>', views.deleteBlog, name="DeleteBlog"),
+    path('comment/delete/<id>', views.deleteComment, name="DeleteComment"),
+    path('pages/unpublish/<id>', views.unpublishBlog, name="UnpublishBlog")
 ]

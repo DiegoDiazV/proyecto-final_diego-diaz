@@ -7,7 +7,7 @@
         </div>
         <div class="row justify-content-center mt-2 ">
             <div class="col-12">
-                <div class="d-flex justify-content-center p-4 default-panel">
+                <div class="d-flex justify-content-center p-4 default-panel mb-4">
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
@@ -34,6 +34,70 @@
                         <div class="row">
                             <h6 class="text-center text-secondary">Vistas: {{ blog.visitas }}</h6>
                         </div>
+                        <br/>
+                        {% if user.is_authenticated and user.is_staff %}
+                        <div class="row justify-content-center">
+                            <div class="col-3">
+                                <a class="btn btn-primary w-100" href="{% url 'UnpublishBlog' id=blog.id %}">Despublicar blog</a>
+                            </div>
+                            <div class="col-3">
+                                <a class="btn btn-danger w-100" href="{% url 'DeleteBlog' id=blog.id fromDetail=1 %}">Eliminar blog</a>
+                            </div>
+                        </div>
+                        <br/>
+                        {% endif %}
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <h3 class="mb-4">Comentarios</h3>
+                            </div>
+                        </div>
+                        {% if user.is_authenticated %}
+                        <form action="" method="POST">{% csrf_token %}
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    {{ form.comentario }}
+                                </div>
+                            </div>
+                            <div class="row justify-content-end">
+                                <div class="col-2">
+                                    <button class="btn btn-primary btn-principal w-100">Comentar</button>
+                                </div>
+                            </div>
+                        </form>
+                        {% else %}
+                        <div class="row justify-content-center">
+                            <h5 class="text-secondary">Para comentar, inicia sesión</h5>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-3">
+                                <a class="btn btn-success btn-principal w-100" href="{% url 'Login' %}">Iniciar sesión</a>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% for c in comentarios %}
+                        <div class="row mt-3">
+                            <div class="col-11">
+                                <h5>{{ c.user.first_name }} {{ c.user.last_name }} - <span class="text-secondary">@{{ c.user.username }}</span></h5>
+                            </div>
+                            {% if user.is_authenticated %}
+                                {% if user.is_staff or c.user == user %}
+                                <div class="col-1">
+                                    <a class="btn btn-outline-danger" href="{% url 'DeleteComment' id=c.id %}">X</a>
+                                </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <h6 class="text-secondary">{{ c.fecha_creacion|date:"d/m/Y" }} {{ c.fecha_creacion|time:"H:i:s" }}</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="text-justify">{{ c.comentario }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

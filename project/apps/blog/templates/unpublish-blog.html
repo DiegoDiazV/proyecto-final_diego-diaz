@@ -3,26 +3,22 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-8">
-            {% if fromDetail == '0' %}
-            <a class="btn btn-primary m-2" href="{% url 'EditBlog' id=blog.id %}">Volver</a>
-            {% else %}
             <a class="btn btn-primary m-2" href="{% url 'Detail' id=blog.id %}">Volver</a>
-            {% endif %}
             <div class="d-flex justify-content-center mt-2 p-4 default-panel">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <h3 class="text-center mb-4">Eliminar Blog</h3>
+                            <h3 class="text-center mb-4">Despublicar Blog</h3>
                         </div>
                     </div>
                     <form action="" method="POST">{% csrf_token %}
                         <div class="row justify-content-center mb-4">
                             <div class="col-10">
-                                <h5 class="text-center">¿Está seguro de eliminar el blog: {{ blog.titulo }}?</h5>
+                                <h5 class="text-center">¿Está seguro de despublicar el blog: {{ blog.titulo }}?</h5>
                             </div>
                         </div>
                         <div class="row justify-content-center mb-2">
-                            <button class="btn btn-danger btn-principal w-30">Si, eliminar</button>
+                            <button class="btn btn-danger btn-principal w-30">Si, despublicar</button>
                         </div>
                     </form>
                 </div>
